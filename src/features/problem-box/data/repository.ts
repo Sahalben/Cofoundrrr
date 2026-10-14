@@ -334,4 +334,11 @@ export class LocalStorageProblemBoxRepository implements ProblemBoxRepository {
   }
 }
 
-export const defaultRepository = new LocalStorageProblemBoxRepository()
+import { supabase, isSupabaseConfigured } from '../../../lib/supabase'
+import { SupabaseProblemBoxRepository } from './supabaseRepository'
+
+export const defaultRepository: ProblemBoxRepository =
+  isSupabaseConfigured() && supabase
+    ? new SupabaseProblemBoxRepository(supabase)
+    : new LocalStorageProblemBoxRepository()
+

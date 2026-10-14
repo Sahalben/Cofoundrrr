@@ -3,11 +3,14 @@ import { Link, useRoute } from '../../../lib/router'
 import { DEMO_USERS, useCurrentUser, setCurrentUser } from '../../../lib/demoSession'
 import { useProblemBoxRepo } from '../data/context'
 
+import { isSupabaseConfigured } from '../../../lib/supabase'
+
 export function ProblemBoxHeader() {
   const currentPath = useRoute()
   const currentUser = useCurrentUser()
   const repo = useProblemBoxRepo()
   const openReportsCount = repo.getReports().filter((r) => r.status === 'open').length
+  const liveBackend = isSupabaseConfigured()
 
   return (
     <header className="border-b border-line bg-white">
@@ -15,8 +18,15 @@ export function ProblemBoxHeader() {
       <div className="border-b border-line/60 bg-mist/90 px-4 py-1.5 text-[0.6875rem] text-ink/70">
         <Container className="flex flex-wrap items-center justify-between gap-2">
           <div className="flex items-center gap-2">
-            <span className="font-semibold text-forest">Demo Identity Switcher:</span>
-            <span>Test 1-vote-per-user &amp; moderation rules:</span>
+            <span
+              className={cx(
+                'rounded-[4px] px-1.5 py-0.5 text-[0.625rem] font-bold uppercase tracking-wider',
+                liveBackend ? 'bg-forest text-mist' : 'bg-ink/10 text-forest',
+              )}
+            >
+              {liveBackend ? 'Backend: Live Supabase Postgres' : 'Storage: Browser LocalStorage (Demo)'}
+            </span>
+            <span className="font-semibold text-forest">Identity Switcher:</span>
             <div className="flex items-center gap-1">
               {DEMO_USERS.map((u) => {
                 const active = currentUser?.id === u.id

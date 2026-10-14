@@ -212,3 +212,50 @@ SELECT
 FROM problems p
 LEFT JOIN problem_validations pv ON pv.problem_id = p.id
 GROUP BY p.id;
+
+-- ----------------------------------------------------------------------------
+-- 9. SUPABASE ROW LEVEL SECURITY (RLS) POLICIES
+-- Strict integrity enforced at database engine level.
+-- ----------------------------------------------------------------------------
+ALTER TABLE submitters ENABLE ROW LEVEL SECURITY;
+ALTER TABLE problems ENABLE ROW LEVEL SECURITY;
+ALTER TABLE problem_evidence ENABLE ROW LEVEL SECURITY;
+ALTER TABLE problem_validations ENABLE ROW LEVEL SECURITY;
+ALTER TABLE problem_comments ENABLE ROW LEVEL SECURITY;
+ALTER TABLE problem_reports ENABLE ROW LEVEL SECURITY;
+ALTER TABLE problem_build_intents ENABLE ROW LEVEL SECURITY;
+
+-- Public Read Permissions
+CREATE POLICY "Public can view submitters" ON submitters FOR SELECT USING (true);
+CREATE POLICY "Public can view published problems" ON problems FOR SELECT USING (status != 'removed');
+CREATE POLICY "Public can view problem evidence" ON problem_evidence FOR SELECT USING (true);
+CREATE POLICY "Public can view problem validations" ON problem_validations FOR SELECT USING (true);
+CREATE POLICY "Public can view visible comments" ON problem_comments FOR SELECT USING (status = 'visible');
+CREATE POLICY "Public can view build intents" ON problem_build_intents FOR SELECT USING (true);
+
+-- Authenticated Member Permissions
+CREATE POLICY "Members can submit problems" ON problems FOR INSERT WITH CHECK (auth.uid() IS NOT NULL);
+CREATE POLICY "Members can attach evidence" ON problem_evidence FOR INSERT WITH CHECK (auth.uid() IS NOT NULL);
+
+-- Strict Validation RLS: Users can only insert/update/delete their OWN validation response
+CREATE POLICY "Users can insert own validation" ON problem_validations
+  FOR INSERT WITH CHECK (auth.uid() = user_id);
+
+CREATE POLICY "Users can update own validation" ON problem_validations
+  FOR UPDATE USING (auth.uid() = user_id) WITH CHECK (auth.uid() = user_id);
+
+CREATE POLICY "Users can delete own validation" ON problem_validations
+  FOR DELETE USING (auth.uid() = user_id);
+
+-- Discussion & Comments
+CREATE POLICY "Users can insert comments" ON problem_comments
+  FOR INSERT WITH CHECK (auth.uid() = author_id);
+
+-- Build Intent
+CREATE POLICY "Users can manage own build intent" ON problem_build_intents
+  FOR ALL USING (auth.uid() = user_id) WITH CHECK (auth.uid() = user_id);
+
+-- Reports
+CREATE POLICY "Users can submit reports" ON problem_reports
+  FOR INSERT WITH CHECK (auth.uid() = reporter_id);
+
