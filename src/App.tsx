@@ -5,6 +5,7 @@ import { Problem } from './sections/Problem'
 import { Pathways } from './sections/Pathways'
 import { Profiles } from './sections/Profiles'
 import { Discovery } from './sections/Discovery'
+import { ProblemBoxShowcase } from './sections/ProblemBoxShowcase'
 import { Journey } from './sections/Journey'
 import { Programs } from './sections/Programs'
 import { ClosingCTA } from './sections/ClosingCTA'
@@ -30,6 +31,7 @@ export default function App() {
         <Pathways />
         <Profiles />
         <Discovery />
+        <ProblemBoxShowcase />
         <Journey />
         <Programs />
         <ClosingCTA />

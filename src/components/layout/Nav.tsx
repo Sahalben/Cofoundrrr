@@ -5,9 +5,9 @@ export const navLinks = [
   { href: '#problem', label: 'Why' },
   { href: '#pathways', label: 'Pathways' },
   { href: '#discovery', label: 'Discovery' },
+  { href: '#problem-box', label: 'Problem Box' },
   { href: '#journey', label: 'Ecosystem' },
   { href: '#programs', label: 'Programs' },
-  { href: '#/problems', label: 'Problem Box' },
 ]
 
 /** Sections with a dark background. The nav flips to light text over these. */

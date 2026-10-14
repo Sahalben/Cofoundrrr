@@ -31,7 +31,7 @@ export function Journey() {
       <Container className="py-24 lg:py-36">
         <div className="grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-4">
-            <Eyebrow index="05" tone="dark">The ecosystem</Eyebrow>
+            <Eyebrow index="06" tone="dark">The ecosystem</Eyebrow>
           </div>
           <Reveal as="h2" className="text-headline font-semibold lg:col-span-8">
             People <span className="text-mint/45">→</span> teams <span className="text-mint/45">→</span> projects{' '}

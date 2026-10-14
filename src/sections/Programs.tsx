@@ -7,7 +7,7 @@ export function Programs() {
       <Container className="py-24 lg:py-36">
         <div className="grid gap-10 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">
-            <Eyebrow index="06">Programs & bootcamps</Eyebrow>
+            <Eyebrow index="07">Programs & bootcamps</Eyebrow>
             <Reveal as="h2" className="mt-8 text-headline font-semibold text-forest">
               Structure for every stage.
             </Reveal>
