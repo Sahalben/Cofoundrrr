@@ -56,15 +56,10 @@ export function ProblemBoxShowcase() {
                 <span key={i} className="h-2.5 w-2.5 rounded-full bg-mint" />
               ))}
             </div>
-            <span className="text-[0.75rem] font-medium text-ink/65">
+            <span className="text-[0.75rem] text-ink/45">
               Problem Box · Real-World Problem Directory
             </span>
-            <a
-              href="#/problems"
-              className="text-[0.75rem] font-medium text-forest hover:underline"
-            >
-              Open Directory &rarr;
-            </a>
+            <span className="text-[0.75rem] text-ink/30">Preview</span>
           </div>
 
           <div className="grid lg:grid-cols-12">
@@ -103,15 +98,6 @@ export function ProblemBoxShowcase() {
                 </p>
               </div>
 
-              <div className="mt-6 pt-6 border-t border-line">
-                <a
-                  href="#/problems/submit"
-                  className="text-xs font-semibold text-forest hover:underline inline-flex items-center gap-1"
-                >
-                  <span>Submit a problem statement</span>
-                  <span aria-hidden="true">&rarr;</span>
-                </a>
-              </div>
             </aside>
 
             {/* Middle Column: Problem list */}
@@ -249,34 +235,22 @@ export function ProblemBoxShowcase() {
                 </div>
               </div>
 
-              {/* Action buttons */}
-              <div className="mt-8 flex flex-col sm:flex-row gap-2.5">
-                <Button href="#/problems" size="md" className="flex-1 justify-center text-center">
-                  Explore Problems &rarr;
-                </Button>
-                <a
-                  href={`#/problems/${active.ref}`}
-                  className="inline-flex h-10 items-center justify-center rounded-[6px] px-3.5 text-xs font-semibold text-forest ring-1 ring-inset ring-line hover:bg-mist transition-colors whitespace-nowrap"
-                >
-                  View Details
-                </a>
+              {/* Illustrative card actions */}
+              <div className="mt-6 flex gap-2">
+                <span className="inline-flex h-10 flex-1 items-center justify-center rounded-[6px] bg-forest text-[0.875rem] font-medium text-mist">
+                  Validate problem
+                </span>
+                <span className="inline-flex h-10 items-center justify-center rounded-[6px] px-4 text-[0.875rem] text-ink ring-1 ring-inset ring-ink/15">
+                  Save
+                </span>
               </div>
             </div>
           </div>
         </Reveal>
 
-        <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <p className="text-[0.75rem] text-ink/50">
-            All problem statements are community-validated and attributed to authentic individuals, organizations, or public repositories.
-          </p>
-          <a
-            href="#/problems"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-forest hover:underline"
-          >
-            <span>Explore all problem statements</span>
-            <span aria-hidden="true">&rarr;</span>
-          </a>
-        </div>
+        <p className="mt-6 text-[0.75rem] text-ink/45">
+          Interactive preview with community-validated problem statements.
+        </p>
       </Container>
     </section>
   )
