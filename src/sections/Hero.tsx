@@ -7,15 +7,15 @@ import { Container } from '../components/ui'
 export function Hero() {
   return (
     <section id="top" className="relative flex min-h-[100svh] flex-col overflow-hidden bg-forest-deep text-mist">
-      {/* Background ambient video at 80% opacity */}
+      {/* Background ambient video at full opacity */}
       <video
         autoPlay
         loop
         muted
         playsInline
-        className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-80"
+        className="pointer-events-none absolute inset-0 h-full w-full object-cover"
       >
-        <source src="/hero-bg.mp4" type="video/mp4" />
+        <source src="/hero-bg-2.mp4" type="video/mp4" />
       </video>
 
       <Container className="relative z-10 flex flex-1 flex-col justify-end pb-14 pt-32 sm:pb-20 lg:pb-24">
