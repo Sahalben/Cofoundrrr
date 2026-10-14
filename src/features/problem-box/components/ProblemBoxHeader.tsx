@@ -1,77 +1,17 @@
 import { Container, Button, cx } from '../../../components/ui'
 import { Link, useRoute } from '../../../lib/router'
-import { DEMO_USERS, useCurrentUser, setCurrentUser } from '../../../lib/demoSession'
 import { useProblemBoxRepo } from '../data/context'
-
-import { isSupabaseConfigured } from '../../../lib/supabase'
 
 export function ProblemBoxHeader() {
   const currentPath = useRoute()
-  const currentUser = useCurrentUser()
   const repo = useProblemBoxRepo()
   const openReportsCount = repo.getReports().filter((r) => r.status === 'open').length
-  const liveBackend = isSupabaseConfigured()
 
   return (
-    <header className="border-b border-line bg-white">
-      {/* Demo identity switcher banner */}
-      <div className="border-b border-line/60 bg-mist/90 px-4 py-1.5 text-[0.6875rem] text-ink/70">
-        <Container className="flex flex-wrap items-center justify-between gap-2">
-          <div className="flex items-center gap-2">
-            <span
-              className={cx(
-                'rounded-[4px] px-1.5 py-0.5 text-[0.625rem] font-bold uppercase tracking-wider',
-                liveBackend ? 'bg-forest text-mist' : 'bg-ink/10 text-forest',
-              )}
-            >
-              {liveBackend ? 'Backend: Live Supabase Postgres' : 'Storage: Browser LocalStorage (Demo)'}
-            </span>
-            <span className="font-semibold text-forest">Identity Switcher:</span>
-            <div className="flex items-center gap-1">
-              {DEMO_USERS.map((u) => {
-                const active = currentUser?.id === u.id
-                return (
-                  <button
-                    key={u.id}
-                    type="button"
-                    onClick={() => setCurrentUser(u.id)}
-                    className={cx(
-                      'rounded-[4px] px-2 py-0.5 font-medium transition-colors',
-                      active
-                        ? 'bg-forest text-mist'
-                        : 'bg-white text-ink/75 hover:bg-mint/80 border border-line',
-                    )}
-                  >
-                    {u.displayName} ({u.role})
-                  </button>
-                )
-              })}
-            </div>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <button
-              type="button"
-              onClick={() => {
-                if (window.confirm('Reset Problem Box to original seed dataset?')) {
-                  repo.resetToSeed()
-                }
-              }}
-              className="text-ink/50 underline hover:text-ink"
-            >
-              Reset Seed Data
-            </button>
-            <a href="#top" className="text-forest font-medium hover:underline">
-              &larr; Back to Landing Page
-            </a>
-          </div>
-        </Container>
-      </div>
-
-      {/* Main Problem Box navigation */}
-      <Container className="flex h-16 items-center justify-between">
-        <div className="flex items-center gap-6">
-          <Link to="/problems" className="flex items-center gap-2.5 text-forest">
+    <header className="border-b border-line bg-white sticky top-0 z-30">
+      <Container className="flex h-16 items-center justify-between gap-4">
+        <div className="flex items-center gap-5 sm:gap-7">
+          <Link to="/problems" className="flex items-center gap-2.5 text-forest shrink-0">
             <svg width="22" height="22" viewBox="0 0 32 32" aria-hidden="true">
               <circle cx="12" cy="16" r="7.5" fill="none" stroke="currentColor" strokeWidth="2.5" />
               <circle cx="20" cy="16" r="7.5" fill="none" stroke="currentColor" strokeOpacity=".4" strokeWidth="2.5" />
@@ -84,7 +24,7 @@ export function ProblemBoxHeader() {
             </div>
           </Link>
 
-          <nav aria-label="Problem Box Navigation" className="hidden items-center gap-5 sm:flex">
+          <nav aria-label="Problem Box Navigation" className="flex items-center gap-4 sm:gap-6">
             <Link
               to="/problems"
               className={cx(
@@ -116,8 +56,19 @@ export function ProblemBoxHeader() {
           </nav>
         </div>
 
-        <div className="flex items-center gap-3">
-          <Button href="#/problems/submit" size="md">
+        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+          <a
+            href="#"
+            className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium text-ink/75 hover:bg-mint/50 hover:text-forest transition-colors"
+          >
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true" className="shrink-0">
+              <path d="M10 13L5 8L10 3" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            <span className="hidden xs:inline">Back to Home</span>
+            <span className="xs:hidden">Home</span>
+          </a>
+          <span className="h-4 w-px bg-line/80 shrink-0" aria-hidden="true" />
+          <Button href="#/problems/submit" size="md" className="whitespace-nowrap text-xs sm:text-sm">
             + Submit Problem
           </Button>
         </div>

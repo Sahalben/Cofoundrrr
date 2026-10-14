@@ -41,7 +41,7 @@ export function IntegrityBanner() {
             <div>
               <p className="font-semibold text-forest">Transparent Provenance</p>
               <p className="mt-1">
-                Statements sourced from public hackathons and ministries are attributed with source program IDs and URLs. Client state is cached locally in demo mode.
+                Statements sourced from public hackathons and ministries are attributed with source program IDs and verified URLs.
               </p>
             </div>
           </div>
