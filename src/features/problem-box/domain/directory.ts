@@ -30,7 +30,11 @@ export function effectiveSeverity(p: Problem, validations: Validation[]): number
 
 export function sortProblems(problems: Problem[], validations: Validation[], sort: SortKey, now = Date.now()): Problem[] {
   const list = [...problems]
-  const byNewest = (a: Problem, b: Problem) => b.createdAt.localeCompare(a.createdAt)
+  const byNewest = (a: Problem, b: Problem) => {
+    const bDate = b?.createdAt ?? ''
+    const aDate = a?.createdAt ?? ''
+    return bDate.localeCompare(aDate)
+  }
 
   switch (sort) {
     case 'newest':
@@ -49,7 +53,7 @@ export function sortProblems(problems: Problem[], validations: Validation[], sor
       const since = now - RISING_WINDOW_DAYS * DAY
       const recent = (id: string, exp: boolean) =>
         validations.filter(
-          (v) => v.problemId === id && isExperienceKind(v.kind) === exp && Date.parse(v.updatedAt) >= since,
+          (v) => v.problemId === id && isExperienceKind(v.kind) === exp && Date.parse(v?.updatedAt ?? '') >= since,
         ).length
       return list.sort(
         (a, b) => recent(b.id, true) - recent(a.id, true) || recent(b.id, false) - recent(a.id, false) || byNewest(a, b),

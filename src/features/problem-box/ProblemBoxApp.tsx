@@ -7,6 +7,8 @@ import { ProblemDetailView } from './views/ProblemDetailView'
 import { ProblemSubmitView } from './views/ProblemSubmitView'
 import { ProblemModerationView } from './views/ProblemModerationView'
 
+import { ErrorBoundary } from '../../components/ui'
+
 export function ProblemBoxApp() {
   const currentPath = useRoute()
 
@@ -28,7 +30,9 @@ export function ProblemBoxApp() {
       <div className="min-h-screen bg-mist text-ink">
         <ProblemBoxHeader />
         <IntegrityBanner />
-        <main>{view}</main>
+        <ErrorBoundary fallbackTitle="Problem Box encountered an issue">
+          <main>{view}</main>
+        </ErrorBoundary>
       </div>
     </ProblemBoxProvider>
   )

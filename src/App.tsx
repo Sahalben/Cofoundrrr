@@ -11,6 +11,7 @@ import { ClosingCTA } from './sections/ClosingCTA'
 import { useReveal } from './hooks/useReveal'
 import { useRoute } from './lib/router'
 import { ProblemBoxApp } from './features/problem-box/ProblemBoxApp'
+import { ErrorBoundary } from './components/ui'
 
 export default function App() {
   useReveal()
@@ -21,7 +22,7 @@ export default function App() {
   }
 
   return (
-    <>
+    <ErrorBoundary>
       <Nav />
       <main>
         <Hero />
@@ -34,6 +35,6 @@ export default function App() {
         <ClosingCTA />
       </main>
       <Footer />
-    </>
+    </ErrorBoundary>
   )
 }

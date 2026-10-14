@@ -2,6 +2,7 @@ import type { CSSProperties, ElementType, ReactNode, AnchorHTMLAttributes, Butto
 
 const cx = (...c: Array<string | false | undefined>) => c.filter(Boolean).join(' ')
 export { cx }
+export { ErrorBoundary } from './ErrorBoundary'
 
 /* ---------- Container: the 12-col editorial frame ---------- */
 export function Container({ children, className }: { children: ReactNode; className?: string }) {
