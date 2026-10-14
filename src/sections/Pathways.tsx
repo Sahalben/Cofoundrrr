@@ -1,4 +1,4 @@
-import { Arrow, Container, Eyebrow, Reveal, cx } from '../components/ui'
+import { Arrow, Container, Reveal, cx } from '../components/ui'
 
 const paths = [
   {
@@ -27,8 +27,7 @@ export function Pathways() {
       <Container className="py-24 lg:py-36">
         <div className="grid gap-10 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">
-            <Eyebrow index="02">Two pathways</Eyebrow>
-            <Reveal as="h2" className="mt-8 text-headline font-semibold text-forest">
+            <Reveal as="h2" className="text-headline font-semibold text-forest">
               One ecosystem. Two ways in.
             </Reveal>
           </div>

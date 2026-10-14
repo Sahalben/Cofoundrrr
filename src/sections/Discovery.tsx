@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Avatar, Container, Eyebrow, Reveal, Tag, cx } from '../components/ui'
+import { Avatar, Container, Reveal, Tag, cx } from '../components/ui'
 import { members, startup } from '../data/sample'
 
 const filters = ['All', 'Engineering', 'Design', 'Growth'] as const
@@ -29,8 +29,7 @@ export function Discovery() {
       <Container className="py-24 lg:py-36">
         <div className="grid gap-10 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">
-            <Eyebrow index="04">Discovery & collaboration</Eyebrow>
-            <Reveal as="h2" className="mt-8 text-headline font-semibold text-forest">
+            <Reveal as="h2" className="text-headline font-semibold text-forest">
               Find the people who complete the picture.
             </Reveal>
           </div>

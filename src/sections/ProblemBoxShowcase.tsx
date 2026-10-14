@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Button, Container, Eyebrow, Reveal, cx } from '../components/ui'
+import { Button, Container, Reveal, cx } from '../components/ui'
 import { SEED_PROBLEMS } from '../features/problem-box/data/seed'
 
 const showcaseProblems = SEED_PROBLEMS.slice(0, 4)
@@ -30,8 +30,7 @@ export function ProblemBoxShowcase() {
       <Container className="py-24 lg:py-36">
         <div className="grid gap-10 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">
-            <Eyebrow index="05">Problem Box</Eyebrow>
-            <Reveal as="h2" className="mt-8 text-headline font-semibold text-forest">
+            <Reveal as="h2" className="text-headline font-semibold text-forest">
               Start with what is broken. Not synthetic guesses.
             </Reveal>
           </div>

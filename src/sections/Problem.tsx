@@ -1,4 +1,4 @@
-import { Container, Eyebrow, Reveal } from '../components/ui'
+import { Container, Reveal } from '../components/ui'
 
 const problems = [
   {
@@ -19,14 +19,9 @@ export function Problem() {
   return (
     <section id="problem" className="bg-forest text-mist">
       <Container className="py-24 lg:py-36">
-        <div className="grid gap-12 lg:grid-cols-12">
-          <div className="lg:col-span-4">
-            <Eyebrow index="01" tone="dark">The problem</Eyebrow>
-          </div>
-          <Reveal as="h2" className="text-headline font-semibold lg:col-span-8">
-            Great companies start with great teams. <span className="text-mist/40">Finding that team is still left to chance.</span>
-          </Reveal>
-        </div>
+        <Reveal as="h2" className="max-w-4xl text-headline font-semibold">
+          Great companies start with great teams. <span className="text-mist/40">Finding that team is still left to chance.</span>
+        </Reveal>
 
         <div className="mt-20 grid border-t border-line-dark md:grid-cols-3 lg:mt-28">
           {problems.map((p, i) => (

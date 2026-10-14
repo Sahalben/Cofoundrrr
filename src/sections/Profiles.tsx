@@ -1,4 +1,4 @@
-import { Container, Eyebrow, Reveal } from '../components/ui'
+import { Container, Reveal } from '../components/ui'
 import { MemberCard, StartupCard } from '../components/mockups/ProfileCards'
 import { members, startup } from '../data/sample'
 
@@ -8,8 +8,7 @@ export function Profiles() {
       <Container className="py-24 lg:py-36">
         <div className="grid gap-16 lg:grid-cols-12">
           <div className="lg:col-span-4">
-            <Eyebrow index="03">Profiles</Eyebrow>
-            <Reveal as="h2" className="mt-8 text-headline font-semibold text-forest">
+            <Reveal as="h2" className="text-headline font-semibold text-forest">
               Identity, made legible.
             </Reveal>
             <Reveal delay={100} className="mt-8 max-w-sm text-lede text-ink/70">
