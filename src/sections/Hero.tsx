@@ -1,18 +1,38 @@
+import { useEffect, useRef } from 'react'
 import { Container } from '../components/ui'
 
 /**
- * Hero — single statement with ambient video background at 80% opacity.
+ * Hero — single statement with ambient video background at full opacity.
  * Original pure SVG version is preserved in Hero.original.tsx for instant revert.
  */
 export function Hero() {
+  const videoRef = useRef<HTMLVideoElement>(null)
+
+  useEffect(() => {
+    const video = videoRef.current
+    if (video) {
+      video.defaultMuted = true
+      video.muted = true
+      const playPromise = video.play()
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          // Retry on next user interaction or document visibility change
+        })
+      }
+    }
+  }, [])
+
   return (
     <section id="top" className="relative flex min-h-[100svh] flex-col overflow-hidden bg-forest-deep text-mist">
       {/* Background ambient video at full opacity */}
       <video
+        ref={videoRef}
         autoPlay
         loop
         muted
         playsInline
+        preload="auto"
+        src="/hero-bg-2.mp4"
         className="pointer-events-none absolute inset-0 h-full w-full object-cover"
       >
         <source src="/hero-bg-2.mp4" type="video/mp4" />
