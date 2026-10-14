@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Button, Container, cx } from '../ui'
+import { MetalButton } from '../spectrumui'
 
 export const navLinks = [
   { href: '#problem', label: 'Why' },
@@ -88,14 +89,23 @@ export function Nav() {
           ))}
         </nav>
         <div className="flex items-center gap-3">
-          <Button
-            href="#join"
-            id="nav-join"
-            variant={onDark ? 'ghost-dark' : 'secondary'}
-            className="hidden sm:inline-flex"
-          >
-            Join Cofoundrrr
-          </Button>
+          <div className="hidden sm:inline-flex">
+            <MetalButton
+              href="#join"
+              id="nav-join"
+              preset="silver"
+              theme={onDark ? 'dark' : 'light'}
+              size="sm"
+              className={cx(
+                'px-4 py-1.5 text-xs font-semibold uppercase tracking-wider',
+                onDark
+                  ? 'text-mist bg-forest-deep/80 hover:bg-forest-deep'
+                  : 'text-forest bg-white/85 hover:bg-white',
+              )}
+            >
+              Join Cofoundrrr
+            </MetalButton>
+          </div>
           <button
             id="nav-menu-toggle"
             type="button"
