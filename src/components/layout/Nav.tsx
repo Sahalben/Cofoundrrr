@@ -11,7 +11,7 @@ export const navLinks = [
 ]
 
 /** Sections with a dark background. The nav flips to light text over these. */
-const DARK_SECTIONS = new Set(['problem', 'journey', 'join'])
+const DARK_SECTIONS = new Set(['top', 'problem', 'journey', 'join'])
 const NAV_PROBE_Y = 36 // vertical centre of the 72px nav
 
 type NavTheme = 'light' | 'dark' // describes the background beneath the nav

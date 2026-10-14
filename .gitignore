@@ -38,3 +38,6 @@ tsconfig.tsbuildinfo
 coverage
 .vitest
 scripts/
+*.mp4
+media resc/
+src/sections/Hero.original.tsx
