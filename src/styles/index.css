@@ -43,12 +43,12 @@
     text-rendering: optimizeLegibility;
   }
   body {
-    @apply bg-mist text-ink font-sans;
+    @apply bg-[#000000] text-mist font-sans;
     font-feature-settings: "ss01", "cv11", "cv05";
   }
   ::selection {
-    background: var(--color-mint);
-    color: var(--color-forest);
+    background: var(--color-forest);
+    color: var(--color-mist);
   }
   :focus-visible {
     outline: 2px solid currentColor;

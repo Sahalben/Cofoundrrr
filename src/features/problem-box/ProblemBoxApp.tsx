@@ -27,7 +27,7 @@ export function ProblemBoxApp() {
 
   return (
     <ProblemBoxProvider>
-      <div className="min-h-screen bg-mist text-ink">
+      <div className="min-h-screen bg-[#000000] text-mist selection:bg-mint selection:text-forest-deep">
         <ProblemBoxHeader />
         <IntegrityBanner />
         <ErrorBoundary fallbackTitle="Problem Box encountered an issue">

@@ -12,7 +12,7 @@ export function SeverityBadge({
     return (
       <span
         className={cx(
-          'inline-flex items-center rounded-[4px] bg-mist px-2 py-0.5 text-[0.6875rem] font-medium text-ink/50',
+          'inline-flex items-center rounded-[4px] bg-white/5 border border-white/10 px-2 py-0.5 text-[0.6875rem] font-medium text-mist/50',
           className,
         )}
       >
@@ -24,13 +24,13 @@ export function SeverityBadge({
   const rounded = Math.round(severity) as Severity
   const meta = SEVERITY_LABELS[rounded] ?? { label: `Level ${severity}`, hint: '' }
 
-  // High severity: bold ink/forest tint; Low severity: subtle mint tint. NO GOLD.
+  // High severity: deep rose-red tint; Level 3: emerald/mint tint; Level 1-2: subtle mist tint. STRICTLY NO GOLD.
   const toneClasses =
     rounded >= 4
-      ? 'bg-forest text-mist font-semibold'
+      ? 'bg-[#2B1114] text-[#FF9E9E] border border-[#FF6B6B]/25 font-semibold'
       : rounded === 3
-        ? 'bg-ink/10 text-forest font-medium'
-        : 'bg-mint text-forest font-medium'
+        ? 'bg-[#0E261C] text-mint border border-mint/30 font-medium'
+        : 'bg-white/5 text-mist/80 border border-white/10 font-medium'
 
   return (
     <span

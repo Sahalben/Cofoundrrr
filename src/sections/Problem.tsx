@@ -1,4 +1,4 @@
-import { Container, Reveal } from '../components/ui'
+import { Container, Reveal, ScrollRevealText } from '../components/ui'
 
 const problems = [
   {
@@ -17,11 +17,15 @@ const problems = [
 
 export function Problem() {
   return (
-    <section id="problem" className="bg-forest text-mist">
+    <section id="problem" className="bg-[#000000] text-mist">
       <Container className="py-24 lg:py-36">
-        <Reveal as="h2" className="max-w-4xl text-headline font-semibold">
-          Great companies start with great teams. <span className="text-mist/40">Finding that team is still left to chance.</span>
-        </Reveal>
+        <ScrollRevealText
+          as="h2"
+          className="max-w-4xl text-headline font-semibold"
+          primaryText="Great companies start with great teams."
+          secondaryText="Finding that team is still left to chance."
+          preset="Masked Lines"
+        />
 
         <div className="mt-20 grid border-t border-line-dark md:grid-cols-3 lg:mt-28">
           {problems.map((p, i) => (
@@ -30,9 +34,9 @@ export function Problem() {
               delay={i * 100}
               className="border-b border-line-dark py-10 md:border-b-0 md:border-l md:px-8 md:first:border-l-0 md:first:pl-0"
             >
-              <span className="text-sm tabular-nums text-mint/60">0{i + 1}</span>
-              <h3 className="mt-6 text-title font-semibold">{p.title}</h3>
-              <p className="mt-4 max-w-sm leading-relaxed text-mist/65">{p.body}</p>
+              <span className="text-sm font-semibold tabular-nums text-mint">0{i + 1}</span>
+              <h3 className="mt-6 text-title font-semibold text-mist">{p.title}</h3>
+              <p className="mt-4 max-w-sm leading-relaxed text-mist/80">{p.body}</p>
             </Reveal>
           ))}
         </div>

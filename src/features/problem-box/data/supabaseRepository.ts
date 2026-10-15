@@ -154,30 +154,65 @@ export class SupabaseProblemBoxRepository implements ProblemBoxRepository {
       const evidenceList = evidence ?? []
       const dbSubmitters = (submitters || []).map(mapDbSubmitter)
 
-      // Retain seed submitters so mock accounts/attribution in seed problems are never orphaned
+      // Retain all seed submitters and merge with database submitters
       const submitterMap = new Map<string, Submitter>()
       SEED_STATE.submitters.forEach((s) => submitterMap.set(s.id, s))
       dbSubmitters.forEach((s) => submitterMap.set(s.id, s))
 
-      const dbProblems = problems && problems.length > 0
-        ? problems.map((p) => mapDbProblem(p, evidenceList))
-        : SEED_STATE.problems
+      // Index problems by ref and ID to merge the curated public bank with live DB problems
+      const problemsByRef = new Map<string, Problem>()
+      SEED_STATE.problems.forEach((p) => problemsByRef.set(p.ref.toUpperCase(), p))
+      if (problems && problems.length > 0) {
+        problems.forEach((p) => {
+          const mapped = mapDbProblem(p, evidenceList)
+          problemsByRef.set(mapped.ref.toUpperCase(), mapped)
+        })
+      }
+      const dbProblems = Array.from(problemsByRef.values())
 
-      const dbValidations = validations && validations.length > 0
-        ? validations.map(mapDbValidation)
-        : SEED_STATE.validations
+      // Merge validations (seed + live)
+      const validationsMap = new Map<string, Validation>()
+      SEED_STATE.validations.forEach((v) => validationsMap.set(`${v.problemId}:${v.userId}`, v))
+      if (validations && validations.length > 0) {
+        validations.forEach((v) => {
+          const mapped = mapDbValidation(v)
+          validationsMap.set(`${mapped.problemId}:${mapped.userId}`, mapped)
+        })
+      }
+      const dbValidations = Array.from(validationsMap.values())
 
-      const dbComments = comments && comments.length > 0
-        ? comments.map(mapDbComment)
-        : SEED_STATE.comments
+      // Merge comments
+      const commentsMap = new Map<string, Comment>()
+      SEED_STATE.comments.forEach((c) => commentsMap.set(c.id, c))
+      if (comments && comments.length > 0) {
+        comments.forEach((c) => {
+          const mapped = mapDbComment(c)
+          commentsMap.set(mapped.id, mapped)
+        })
+      }
+      const dbComments = Array.from(commentsMap.values())
 
-      const dbReports = reports && reports.length > 0
-        ? reports.map(mapDbReport)
-        : SEED_STATE.reports
+      // Merge reports
+      const reportsMap = new Map<string, Report>()
+      SEED_STATE.reports.forEach((r) => reportsMap.set(r.id, r))
+      if (reports && reports.length > 0) {
+        reports.forEach((r) => {
+          const mapped = mapDbReport(r)
+          reportsMap.set(mapped.id, mapped)
+        })
+      }
+      const dbReports = Array.from(reportsMap.values())
 
-      const dbBuildInterest = buildIntents && buildIntents.length > 0
-        ? buildIntents.map(mapDbBuildIntent)
-        : SEED_STATE.buildInterest
+      // Merge build interest
+      const buildMap = new Map<string, BuildInterest>()
+      SEED_STATE.buildInterest.forEach((b) => buildMap.set(`${b.problemId}:${b.userId}`, b))
+      if (buildIntents && buildIntents.length > 0) {
+        buildIntents.forEach((b) => {
+          const mapped = mapDbBuildIntent(b)
+          buildMap.set(`${mapped.problemId}:${mapped.userId}`, mapped)
+        })
+      }
+      const dbBuildInterest = Array.from(buildMap.values())
 
       this.cachedState = {
         version: 1,

@@ -88,6 +88,23 @@ export class LocalStorageProblemBoxRepository implements ProblemBoxRepository {
         this.persist(SEED_STATE)
         return SEED_STATE
       }
+
+      // Ensure any newly added seed problems and submitters are present
+      const knownRefs = new Set(parsed.problems.map((p) => p.ref.toUpperCase()))
+      const missingSeeds = SEED_STATE.problems.filter((p) => !knownRefs.has(p.ref.toUpperCase()))
+      if (missingSeeds.length > 0) {
+        const merged: ProblemBoxState = {
+          ...parsed,
+          problems: [...parsed.problems, ...missingSeeds],
+          submitters: [
+            ...parsed.submitters,
+            ...SEED_STATE.submitters.filter((s) => !parsed.submitters.some((existing) => existing.id === s.id)),
+          ],
+        }
+        this.persist(merged)
+        return merged
+      }
+
       return parsed
     } catch {
       return SEED_STATE

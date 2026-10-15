@@ -111,18 +111,18 @@ export function ProblemSubmitView() {
   }
 
   return (
-    <div className="min-h-screen bg-mist/30 pb-24">
+    <div className="min-h-screen bg-[#000000] pb-24 text-mist">
       {/* Header */}
-      <section className="border-b border-line bg-white py-10">
+      <section className="border-b border-white/10 bg-[#08150E]/80 backdrop-blur-md py-10">
         <Container>
           <div className="max-w-2xl">
-            <Link to="/problems" className="text-xs text-forest underline hover:text-ink">
+            <Link to="/problems" className="text-xs text-mint underline hover:text-mist transition-colors">
               &larr; Back to Problem Directory
             </Link>
-            <h1 className="mt-3 text-3xl font-bold tracking-tight text-forest">
+            <h1 className="mt-3 text-3xl font-bold tracking-tight text-mist">
               Submit a Problem Statement
             </h1>
-            <p className="mt-2 text-xs leading-relaxed text-ink/70">
+            <p className="mt-2 text-xs leading-relaxed text-mist/70">
               Contribute a friction point, structural obstacle, or market failure that needs a dedicated solution.
               Quality statements help founders and teams assemble around high-conviction challenges.
             </p>
@@ -131,16 +131,16 @@ export function ProblemSubmitView() {
       </section>
 
       <Container className="mt-8 max-w-3xl">
-        <form onSubmit={handleSubmit} className="rounded-[10px] border border-line bg-white p-6 sm:p-8 shadow-card space-y-6">
+        <form onSubmit={handleSubmit} className="rounded-[10px] border border-white/10 bg-[#0A120E] p-6 sm:p-8 shadow-card space-y-6">
           {/* Real-time duplicate warning */}
           <DuplicateWarning matches={duplicateMatches} />
 
           {/* Title */}
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-forest">
-              Problem Title <span className="text-forest">*</span>
+            <label className="block text-xs font-bold uppercase tracking-wider text-mist">
+              Problem Title <span className="text-mint">*</span>
             </label>
-            <p className="mt-0.5 text-[0.6875rem] text-ink/60">
+            <p className="mt-0.5 text-[0.6875rem] text-mist/50">
               Clear, descriptive summary of the problem (12–140 characters).
             </p>
             <input
@@ -148,24 +148,24 @@ export function ProblemSubmitView() {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="e.g. Lack of cold chain telemetry for remote clinic vaccines"
-              className="mt-1.5 w-full rounded-[6px] border border-line bg-mist/30 px-3.5 py-2 text-xs text-ink focus:border-forest focus:bg-white focus:outline-none"
+              className="mt-1.5 w-full rounded-[6px] border border-white/15 bg-[#08150E] px-3.5 py-2 text-xs text-mist placeholder:text-mist/40 focus:border-mint focus:bg-[#0A120E] focus:outline-none"
             />
-            {errors.title && <p className="mt-1 text-xs text-red-700 font-medium">{errors.title}</p>}
+            {errors.title && <p className="mt-1 text-xs text-[#FF6B6B] font-medium">{errors.title}</p>}
           </div>
 
           {/* Industry & Severity */}
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-forest">
-                Industry Sector <span className="text-forest">*</span>
+              <label className="block text-xs font-bold uppercase tracking-wider text-mist">
+                Industry Sector <span className="text-mint">*</span>
               </label>
               <select
                 value={industry}
                 onChange={(e) => setIndustry(e.target.value as Industry)}
-                className="mt-1.5 w-full rounded-[6px] border border-line bg-mist/30 px-3 py-2 text-xs text-ink focus:border-forest focus:bg-white focus:outline-none"
+                className="mt-1.5 w-full rounded-[6px] border border-white/15 bg-[#08150E] px-3 py-2 text-xs text-mist focus:border-mint focus:bg-[#0A120E] focus:outline-none"
               >
                 {INDUSTRIES.map((ind) => (
-                  <option key={ind} value={ind}>
+                  <option key={ind} value={ind} className="bg-[#0A120E] text-mist">
                     {ind}
                   </option>
                 ))}
@@ -173,16 +173,16 @@ export function ProblemSubmitView() {
             </div>
 
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-forest">
-                Initial Severity Assessment <span className="text-forest">*</span>
+              <label className="block text-xs font-bold uppercase tracking-wider text-mist">
+                Initial Severity Assessment <span className="text-mint">*</span>
               </label>
               <select
                 value={severity}
                 onChange={(e) => setSeverity(Number(e.target.value) as Severity)}
-                className="mt-1.5 w-full rounded-[6px] border border-line bg-mist/30 px-3 py-2 text-xs text-ink focus:border-forest focus:bg-white focus:outline-none"
+                className="mt-1.5 w-full rounded-[6px] border border-white/15 bg-[#08150E] px-3 py-2 text-xs text-mist focus:border-mint focus:bg-[#0A120E] focus:outline-none"
               >
                 {([1, 2, 3, 4, 5] as Severity[]).map((lvl) => (
-                  <option key={lvl} value={lvl}>
+                  <option key={lvl} value={lvl} className="bg-[#0A120E] text-mist">
                     Level {lvl} — {SEVERITY_LABELS[lvl].label}
                   </option>
                 ))}
@@ -192,10 +192,10 @@ export function ProblemSubmitView() {
 
           {/* Description */}
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-forest">
-              Detailed Problem Description <span className="text-forest">*</span>
+            <label className="block text-xs font-bold uppercase tracking-wider text-mist">
+              Detailed Problem Description <span className="text-mint">*</span>
             </label>
-            <p className="mt-0.5 text-[0.6875rem] text-ink/60">
+            <p className="mt-0.5 text-[0.6875rem] text-mist/50">
               Provide specific context, failure modes, and why existing solutions do not work (min 80 characters).
             </p>
             <textarea
@@ -203,23 +203,23 @@ export function ProblemSubmitView() {
               onChange={(e) => setDescription(e.target.value)}
               rows={5}
               placeholder="Explain the background, why this occurs, and the direct consequences on stakeholders..."
-              className="mt-1.5 w-full rounded-[6px] border border-line bg-mist/30 px-3.5 py-2 text-xs text-ink focus:border-forest focus:bg-white focus:outline-none"
+              className="mt-1.5 w-full rounded-[6px] border border-white/15 bg-[#08150E] px-3.5 py-2 text-xs text-mist placeholder:text-mist/40 focus:border-mint focus:bg-[#0A120E] focus:outline-none"
             />
-            <div className="mt-1 flex justify-between text-[0.6875rem] text-ink/40">
+            <div className="mt-1 flex justify-between text-[0.6875rem] text-mist/40">
               <span>{description.length} / 5000 chars</span>
               <span>Min. 80 chars required</span>
             </div>
             {errors.description && (
-              <p className="mt-1 text-xs text-red-700 font-medium">{errors.description}</p>
+              <p className="mt-1 text-xs text-[#FF6B6B] font-medium">{errors.description}</p>
             )}
           </div>
 
           {/* Affected Audience */}
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-forest">
-              Who is specifically affected? <span className="text-forest">*</span>
+            <label className="block text-xs font-bold uppercase tracking-wider text-mist">
+              Who is specifically affected? <span className="text-mint">*</span>
             </label>
-            <p className="mt-0.5 text-[0.6875rem] text-ink/60">
+            <p className="mt-0.5 text-[0.6875rem] text-mist/50">
               Identify key personas (e.g. smallholder dairy farmers, junior doctors, municipal technicians).
             </p>
             <input
@@ -227,19 +227,19 @@ export function ProblemSubmitView() {
               value={affectedAudience}
               onChange={(e) => setAffectedAudience(e.target.value)}
               placeholder="e.g. Rural healthcare workers, ASHAs, and pediatric patients"
-              className="mt-1.5 w-full rounded-[6px] border border-line bg-mist/30 px-3.5 py-2 text-xs text-ink focus:border-forest focus:bg-white focus:outline-none"
+              className="mt-1.5 w-full rounded-[6px] border border-white/15 bg-[#08150E] px-3.5 py-2 text-xs text-mist placeholder:text-mist/40 focus:border-mint focus:bg-[#0A120E] focus:outline-none"
             />
             {errors.affectedAudience && (
-              <p className="mt-1 text-xs text-red-700 font-medium">{errors.affectedAudience}</p>
+              <p className="mt-1 text-xs text-[#FF6B6B] font-medium">{errors.affectedAudience}</p>
             )}
           </div>
 
           {/* Existing Workarounds */}
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-forest">
+            <label className="block text-xs font-bold uppercase tracking-wider text-mist">
               Current Workarounds &amp; Limitations (Optional)
             </label>
-            <p className="mt-0.5 text-[0.6875rem] text-ink/60">
+            <p className="mt-0.5 text-[0.6875rem] text-mist/50">
               What do people currently do to cope with this issue?
             </p>
             <textarea
@@ -247,16 +247,16 @@ export function ProblemSubmitView() {
               onChange={(e) => setExistingWorkarounds(e.target.value)}
               rows={3}
               placeholder="e.g. Manual paper logs, ad-hoc spreadsheets, costly outsourced testing..."
-              className="mt-1.5 w-full rounded-[6px] border border-line bg-mist/30 px-3.5 py-2 text-xs text-ink focus:border-forest focus:bg-white focus:outline-none"
+              className="mt-1.5 w-full rounded-[6px] border border-white/15 bg-[#08150E] px-3.5 py-2 text-xs text-mist placeholder:text-mist/40 focus:border-mint focus:bg-[#0A120E] focus:outline-none"
             />
           </div>
 
           {/* Supporting Evidence Attachments */}
-          <div className="rounded-[8px] border border-line/80 bg-mist/40 p-4">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-forest">
+          <div className="rounded-[8px] border border-white/10 bg-white/[0.03] p-4">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-mint">
               Supporting Evidence &amp; Documentation (Optional)
             </h4>
-            <p className="mt-0.5 text-[0.6875rem] text-ink/60">
+            <p className="mt-0.5 text-[0.6875rem] text-mist/50">
               Add links to official reports, research articles, or incident documentation.
             </p>
 
@@ -265,16 +265,16 @@ export function ProblemSubmitView() {
                 {evidenceList.map((ev) => (
                   <li
                     key={ev.id}
-                    className="flex items-center justify-between rounded-[4px] bg-white p-2.5 text-xs border border-line"
+                    className="flex items-center justify-between rounded-[4px] bg-[#0A120E] p-2.5 text-xs border border-white/10"
                   >
                     <div>
-                      <span className="font-semibold text-forest">{ev.label}</span>
-                      {ev.url && <span className="ml-2 text-ink/40 font-mono text-[0.6875rem] truncate">({ev.url})</span>}
+                      <span className="font-semibold text-mist">{ev.label}</span>
+                      {ev.url && <span className="ml-2 text-mint font-mono text-[0.6875rem] truncate">({ev.url})</span>}
                     </div>
                     <button
                       type="button"
                       onClick={() => handleRemoveEvidence(ev.id)}
-                      className="text-xs text-red-700 hover:underline"
+                      className="text-xs text-[#FF6B6B] hover:underline"
                     >
                       Remove
                     </button>
@@ -290,32 +290,32 @@ export function ProblemSubmitView() {
                   value={evidenceLabel}
                   onChange={(e) => setEvidenceLabel(e.target.value)}
                   placeholder="Doc title / label"
-                  className="rounded-[4px] border border-line bg-white px-2.5 py-1.5 text-xs text-ink focus:border-forest focus:outline-none"
+                  className="rounded-[4px] border border-white/15 bg-[#08150E] px-2.5 py-1.5 text-xs text-mist placeholder:text-mist/40 focus:border-mint focus:outline-none"
                 />
                 <input
                   type="url"
                   value={evidenceUrl}
                   onChange={(e) => setEvidenceUrl(e.target.value)}
                   placeholder="https://... (http/https only)"
-                  className="rounded-[4px] border border-line bg-white px-2.5 py-1.5 text-xs text-ink focus:border-forest focus:outline-none"
+                  className="rounded-[4px] border border-white/15 bg-[#08150E] px-2.5 py-1.5 text-xs text-mist placeholder:text-mist/40 focus:border-mint focus:outline-none"
                 />
                 <button
                   type="button"
                   onClick={handleAddEvidence}
                   disabled={!evidenceLabel.trim()}
-                  className="rounded-[4px] bg-forest px-3 py-1.5 text-xs font-semibold text-mist hover:bg-forest-deep disabled:opacity-50"
+                  className="rounded-[4px] bg-mint px-3 py-1.5 text-xs font-bold text-forest-deep hover:bg-mint/90 disabled:opacity-40 transition-colors"
                 >
                   + Add Evidence Link
                 </button>
               </div>
             )}
             {errors.evidenceUrl && (
-              <p className="mt-1.5 text-xs text-red-700 font-medium">{errors.evidenceUrl}</p>
+              <p className="mt-1.5 text-xs text-[#FF6B6B] font-medium">{errors.evidenceUrl}</p>
             )}
           </div>
 
-          <div className="flex items-center justify-between border-t border-line pt-4">
-            <Link to="/problems" className="text-xs text-ink/60 hover:text-ink">
+          <div className="flex items-center justify-between border-t border-white/10 pt-4">
+            <Link to="/problems" className="text-xs text-mist/60 hover:text-mist transition-colors">
               Cancel
             </Link>
             <Button type="submit" size="lg">

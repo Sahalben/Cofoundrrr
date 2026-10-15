@@ -12,7 +12,7 @@ export const navLinks = [
 ]
 
 /** Sections with a dark background. The nav flips to light text over these. */
-const DARK_SECTIONS = new Set(['top', 'problem', 'journey', 'join'])
+const DARK_SECTIONS = new Set(['top', 'problem', 'pathways', 'profiles', 'discovery', 'problem-box', 'journey', 'programs', 'join'])
 const NAV_PROBE_Y = 36 // vertical centre of the 72px nav
 
 type NavTheme = 'light' | 'dark' // describes the background beneath the nav
@@ -34,7 +34,7 @@ export function Wordmark({ tone = 'dark' }: { tone?: 'dark' | 'light' }) {
 
 /** Determines whether the section currently behind the nav is dark or light. */
 function useNavTheme(): NavTheme {
-  const [theme, setTheme] = useState<NavTheme>('light')
+  const [theme, setTheme] = useState<NavTheme>('dark')
   useEffect(() => {
     let frame = 0
     const update = () => {
@@ -81,7 +81,7 @@ export function Nav() {
               id={`nav-link-${l.href.slice(1)}`}
               className={cx(
                 'text-[0.8125rem] font-medium uppercase tracking-[0.1em] transition-colors duration-300',
-                onDark ? 'text-mist/65 hover:text-mist' : 'text-forest/65 hover:text-forest',
+                onDark ? 'text-mist/75 hover:text-mist' : 'text-forest/75 hover:text-forest',
               )}
             >
               {l.label}
@@ -131,29 +131,46 @@ export function Nav() {
         </div>
       </Container>
 
-      {/* Mobile menu takes the colour of the section beneath so it reads as part of the page */}
+      {/* Mobile menu drawer: frosted glass backdrop with editorial styling */}
       <div
         id="mobile-menu"
         className={cx(
           'overflow-hidden transition-[max-height] duration-500 md:hidden',
-          open ? 'max-h-[460px]' : 'max-h-0',
-          onDark ? 'bg-forest text-mist' : 'bg-mint text-forest',
+          open ? 'max-h-[520px] border-b shadow-2xl' : 'max-h-0',
+          onDark
+            ? 'bg-[#000000]/95 backdrop-blur-2xl border-white/10 text-mist'
+            : 'bg-white/95 backdrop-blur-2xl border-line text-forest',
         )}
       >
-        <Container className="flex flex-col pb-6">
-          {navLinks.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
+        <Container className="flex flex-col py-6">
+          <div className={cx('flex flex-col divide-y', onDark ? 'divide-white/10' : 'divide-line')}>
+            {navLinks.map((l, idx) => (
+              <a
+                key={l.href}
+                href={l.href}
+                onClick={() => setOpen(false)}
+                className={cx(
+                  'flex items-center justify-between py-3.5 text-lg font-medium tracking-[-0.02em] transition-colors',
+                  onDark ? 'text-mist/90 hover:text-mint' : 'text-forest hover:text-mint',
+                )}
+              >
+                <span>{l.label}</span>
+                <span className="text-xs font-mono font-medium text-mint/70">0{idx + 1}</span>
+              </a>
+            ))}
+          </div>
+          <div className="pt-6">
+            <Button
+              href="#join"
+              size="lg"
+              variant={onDark ? 'light' : 'primary'}
+              className="w-full justify-center"
+              arrow
               onClick={() => setOpen(false)}
-              className={cx('border-b py-4 text-2xl font-medium tracking-[-0.03em]', onDark ? 'border-line-dark' : 'border-line')}
             >
-              {l.label}
-            </a>
-          ))}
-          <Button href="#join" size="lg" variant={onDark ? 'light' : 'primary'} className="mt-6" arrow onClick={() => setOpen(false)}>
-            Join Cofoundrrr
-          </Button>
+              Join Cofoundrrr
+            </Button>
+          </div>
         </Container>
       </div>
     </header>

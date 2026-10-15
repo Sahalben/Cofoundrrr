@@ -58,16 +58,9 @@ const stages: SwatchItem[] = [
 
 export function Journey() {
   return (
-    <section id="journey" className="bg-forest text-mist">
+    <section id="journey" className="bg-[#000000] text-mist">
       <Container className="py-24 lg:py-36">
-        <div className="max-w-4xl">
-          <Reveal as="h2" className="text-headline font-semibold">
-            People <span className="text-mint/45">→</span> teams <span className="text-mint/45">→</span> projects{' '}
-            <span className="text-mint/45">→</span> startups.
-          </Reveal>
-        </div>
-
-        <Reveal delay={120} className="mt-16 w-full lg:mt-20">
+        <Reveal delay={80} className="w-full">
           <div className="h-[520px] sm:h-[580px] lg:h-[620px] w-full">
             <SwatchAccordion
               items={stages}
@@ -78,8 +71,8 @@ export function Journey() {
               radius="20px"
               gap="10px"
               textColor="#F0F7F4"
-              buttonColor="#0B1A12"
-              buttonTextColor="#F0F7F4"
+              buttonColor="#DDEEE6"
+              buttonTextColor="#061810"
               style={{ width: '100%', height: '100%' }}
             />
           </div>

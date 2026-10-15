@@ -8,7 +8,6 @@ import { Discovery } from './sections/Discovery'
 import { ProblemBoxShowcase } from './sections/ProblemBoxShowcase'
 import { Journey } from './sections/Journey'
 import { Programs } from './sections/Programs'
-import { ClosingCTA } from './sections/ClosingCTA'
 import { useReveal } from './hooks/useReveal'
 import { useRoute } from './lib/router'
 import { ProblemBoxApp } from './features/problem-box/ProblemBoxApp'
@@ -34,7 +33,6 @@ export default function App() {
         <ProblemBoxShowcase />
         <Journey />
         <Programs />
-        <ClosingCTA />
       </main>
       <Footer />
     </ErrorBoundary>

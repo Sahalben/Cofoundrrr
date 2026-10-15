@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   server: {
     watch: {
-      ignored: ['**/*.mp4', '**/media resc/**', '**/Hero.original.tsx'],
+      ignored: ['**/*.mp4', '**/*.jpg', '**/*.jpeg', '**/*.png', '**/media resc/**', '**/Hero.original.tsx'],
     },
   },
 })

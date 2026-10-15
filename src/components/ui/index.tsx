@@ -4,6 +4,7 @@ const cx = (...c: Array<string | false | undefined>) => c.filter(Boolean).join('
 export { cx }
 export { ErrorBoundary } from './ErrorBoundary'
 export { SwatchAccordion } from './SwatchAccordion'
+export { ScrollRevealText } from './ScrollRevealText'
 
 /* ---------- Container: the 12-col editorial frame ---------- */
 export function Container({ children, className }: { children: ReactNode; className?: string }) {
@@ -57,10 +58,10 @@ export function Button({
   ...rest
 }: ButtonProps) {
   const variants = {
-    primary: 'bg-forest text-mist hover:bg-forest-deep',
-    secondary: 'bg-transparent text-ink ring-1 ring-inset ring-ink/20 hover:ring-ink/50',
-    light: 'bg-mint text-forest hover:bg-mist',
-    'ghost-dark': 'bg-transparent text-mist ring-1 ring-inset ring-mist/25 hover:ring-mist/60',
+    primary: 'bg-mint text-forest-deep font-semibold hover:bg-white transition-all shadow-sm',
+    secondary: 'bg-white/[0.05] text-mist ring-1 ring-inset ring-white/20 hover:bg-white/10 hover:ring-white/40 transition-all',
+    light: 'bg-mint text-forest-deep font-semibold hover:bg-white transition-all shadow-sm',
+    'ghost-dark': 'bg-transparent text-mist ring-1 ring-inset ring-white/20 hover:bg-white/10 hover:ring-white/40 transition-all',
   }
   const sizes = { md: 'h-11 px-5 text-[0.9375rem]', lg: 'h-14 px-7 text-base' }
   const classes = cx(
@@ -125,10 +126,10 @@ export function Avatar({
   size?: number
 }) {
   const tones = {
-    forest: 'bg-forest text-mist',
-    mist: 'bg-mist text-forest ring-1 ring-inset ring-forest/25',
-    mint: 'bg-mint text-forest',
-    ink: 'bg-ink text-mint',
+    forest: 'bg-[#0F291E] text-mint border border-mint/25',
+    mist: 'bg-white/10 text-mist border border-white/20',
+    mint: 'bg-mint text-forest-deep font-bold',
+    ink: 'bg-[#14231C] text-mist/90 border border-white/10',
   }
   return (
     <span
@@ -144,8 +145,8 @@ export function Avatar({
 /* ---------- Tag: squared, understated ---------- */
 export function Tag({ children, tone = 'light' }: { children: ReactNode; tone?: 'light' | 'dark' }) {
   const tones = {
-    light: 'bg-mint/70 text-ink',
-    dark: 'bg-mist/10 text-mist/85',
+    light: 'bg-white/[0.08] border border-white/12 text-mist/90',
+    dark: 'bg-mint/15 border border-mint/25 text-mint font-medium',
   }
-  return <span className={cx('inline-flex h-6 items-center rounded-[4px] px-2 text-[0.75rem] font-medium', tones[tone])}>{children}</span>
+  return <span className={cx('inline-flex h-6 items-center rounded-[4px] px-2 text-[0.75rem]', tones[tone])}>{children}</span>
 }
